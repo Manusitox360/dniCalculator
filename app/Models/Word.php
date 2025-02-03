@@ -9,10 +9,4 @@ class Word extends Model
 {
     use HasFactory;
     protected $fillable = ['abcedary'];
-
-    public function getAbecedaryLetter($value)
-    {
-        $position = $value % 23;
-        return $this->abcedary[$position];
-    }
 }
