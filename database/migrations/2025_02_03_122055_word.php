@@ -11,7 +11,7 @@ return new class extends Migration
     {
         Schema::create('word', function (Blueprint $table) {
             $table->id();
-            $table->string('abcedary');
+            $table->char('abcedary');
             $table->timestamps();
         });
     }
