@@ -12,6 +12,7 @@ return new class extends Migration
         Schema::create('word', function (Blueprint $table) {
             $table->id();
             $table->char('abcedary');
+            $table->integer('module');
             $table->timestamps();
         });
     }

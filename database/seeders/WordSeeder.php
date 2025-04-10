@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Models\Word;
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Word;
 
 class WordSeeder extends Seeder
 {
@@ -13,7 +12,6 @@ class WordSeeder extends Seeder
      */
     public function run(): void
     {
-        //
         $words = [
             'T',
             'R',
@@ -39,10 +37,12 @@ class WordSeeder extends Seeder
             'K',
             'E'
         ];
-            foreach($words as $word){
-                Word::create([
-                    'abcedary' => $word
+
+        foreach ($words as $index => $word) {
+            Word::create([
+                'abcedary' => $word,
+                'module' => $index + 1
             ]);
-            }
+        }
     }
 }

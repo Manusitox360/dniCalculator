@@ -8,8 +8,7 @@ use App\Http\Controllers\Controller;
 
 class WordApiController extends Controller
 {
-   
-    public function store(Request $request)
+    public function __invoke(Request $request)
     {
         // Validate the DNI
         $validated = $request->validate([
@@ -21,10 +20,15 @@ class WordApiController extends Controller
         // Calculate the module
         $calculatedModule = $this->calculateModule($dni);
 
-        // Find the word 
+        // Find the word by the calculated module
         $word = $this->findWordByModule($calculatedModule);
 
-        // Return a JSON response
+        // Check if the word exists
+        if (!$word) {
+            return response()->json(['error' => 'Word not found'], 404);
+        }
+
+        // Call the ResponseSucces method with the word
         return $this->ResponseSucces($dni, $word);
     }
 
@@ -36,8 +40,8 @@ class WordApiController extends Controller
 
     private function findWordByModule(int $calculatedModule)
     {
-        $word = Word::find($calculatedModule);
-        return $word -> word ;
+        $word = Word::where('module', $calculatedModule)->first();
+        return $word ? $word->word : null;
     }
 
     private function ResponseSucces($dni, $word)
